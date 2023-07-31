@@ -6,7 +6,10 @@ package main
 // go run mrsequential.go wc.so pg*.txt
 //
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 import "6.824/mr"
 import "plugin"
 import "os"
@@ -28,6 +31,8 @@ func main() {
 		os.Exit(1)
 	}
 
+	fmt.Printf("args[0]:%s\nargs[1]:%s\nargs[2:]:%s\n", os.Args[0], os.Args[1], strings.Join(os.Args[2:], ","))
+
 	mapf, reducef := loadPlugin(os.Args[1])
 
 	//
@@ -41,6 +46,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("cannot open %v", filename)
 		}
+		println("read file:" + file.Name())
 		content, err := ioutil.ReadAll(file)
 		if err != nil {
 			log.Fatalf("cannot read %v", filename)
