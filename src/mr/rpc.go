@@ -24,6 +24,26 @@ type ExampleReply struct {
 
 // Add your RPC definitions here.
 
+// Task 任务传输的结构定义，用于Coordinator和Map以及Reduce任务的通信交互
+type PollTaskArgs struct {
+}
+
+type Task struct {
+	Id       int
+	TaskType TaskType
+	Filename string
+	HashMod  int
+}
+
+type TaskType int
+
+const (
+	Unknow = iota
+	MapTask
+	ReduceTask
+	WatiTask
+	ExitTask
+)
 
 // Cook up a unique-ish UNIX-domain socket name
 // in /var/tmp, for the coordinator.
